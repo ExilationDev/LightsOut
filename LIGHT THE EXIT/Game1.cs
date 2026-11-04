@@ -4,147 +4,140 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System;
+using MonoGameLibrary;
+using LightTheExit.Scripts;
 
-namespace LightTheExit
+namespace LightTheExit;
+
+public class Game1 : Core
 {
-    public class Game1 : Game
+    //Player player;
+    //List<Sprite> enemies = new List<Sprite>();
+    //Random rnd = new Random();
+    //Keyboard kb = new Keyboard();
+
+    //Texture2D texPlayer;
+    //Texture2D texEnemy;
+    //Texture2D dark;
+
+    //Camera cam = new Camera();
+
+    PlayerScript playerScript;
+
+    public Game1() : base("Lights Out", 1280, 720, false) {}
+
+    protected override void Initialize()
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        playerScript = new PlayerScript();
+        base.Initialize();
+    }
 
-        Player player;
-        List<Sprite> enemies = new List<Sprite>();
-        Random rnd = new Random();
-        Keyboard kb = new Keyboard();
+    protected override void LoadContent()
+    {
+        playerScript.LoadContent(Content);
+        //texPlayer = Content.Load<Texture2D>("ccc1edbf-3773-4c27-b3d6-beb59b49dcd8");
+        //texEnemy = Content.Load<Texture2D>("244d8923-fe04-4759-a334-075b5e92b9bf");
 
-        Texture2D texPlayer;
-        Texture2D texEnemy;
-        Texture2D dark;
+        //player = new Player(texPlayer, new Vector2(1600, 900));
+        //player.scale = 0.15f;
 
-        Camera cam = new Camera();
+        //for (int i = 0; i < 12; i++)
+        //{
+        //    Vector2 p;
+        //    while (true)
+        //    {
+        //        p = new Vector2(rnd.Next(60, 3200 - 60), rnd.Next(60, 1800 - 60));
+        //        bool ok = true;
+        //        if (Vector2.Distance(p, player.position) < 140) ok = false;
+        //        foreach(var other in enemies)
+        //        {
+        //            if (Vector2.Distance(p, other.position) < 80) ok = false;
+        //        }
+        //        if (ok) break;
+        //    }
 
-        public Game1()
-        {
-            graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
-            graphics.PreferredBackBufferWidth = 1600;
-            graphics.PreferredBackBufferHeight = 900;
-            graphics.IsFullScreen = false;
-            graphics.ApplyChanges();
-        }
+        //    Sprite e = new Sprite(texEnemy, p);
+        //    e.scale = 0.15f;
+        //    enemies.Add(e);
+        //}
+        //Debug.WriteLine("spawned " + enemies.Count);
 
-        protected override void Initialize()
-        {
-            base.Initialize();
-        }
+        //Color[] px = new Color[1024 * 1024];
+        //for (int y = 0; y < 1024; y++)
+        //{
+        //    for (int x = 0; x < 1024; x++)
+        //    {
+        //        float d = (float)Math.Sqrt((x - 512) * (x - 512) + (y - 512) * (y - 512));
 
-        protected override void LoadContent()
-        {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+        //        if (d < 40) px[y * 1024 + x] = new Color(0, 0, 0, 0);
+        //        else if (d < 50) px[y * 1024 + x] = new Color(0, 0, 0, (int)(255 * ((d - 40) / 10)));
+        //        else px[y * 1024 + x] = Color.Black;
+        //    }
+        //}
 
-            texPlayer = Content.Load<Texture2D>("ccc1edbf-3773-4c27-b3d6-beb59b49dcd8");
-            texEnemy = Content.Load<Texture2D>("244d8923-fe04-4759-a334-075b5e92b9bf");
+        //dark = new Texture2D(GraphicsDevice, 1024, 1024);
+        //dark.SetData(px);
+    }
 
-            player = new Player(texPlayer, new Vector2(1600, 900));
-            player.scale = 0.15f;
+    protected override void Update(GameTime gameTime)
+    {
+        //kb.update();
 
-            for (int i = 0; i < 12; i++)
-            {
-                Vector2 p;
-                while (true)
-                {
-                    p = new Vector2(rnd.Next(60, 3200 - 60), rnd.Next(60, 1800 - 60));
-                    bool ok = true;
-                    if (Vector2.Distance(p, player.position) < 140) ok = false;
-                    foreach(var other in enemies)
-                    {
-                        if (Vector2.Distance(p, other.position) < 80) ok = false;
-                    }
-                    if (ok) break;
-                }
+        //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || kb.isDown(Keys.Escape)) Exit();
 
-                Sprite e = new Sprite(texEnemy, p);
-                e.scale = 0.15f;
-                enemies.Add(e);
-            }
-            Debug.WriteLine("spawned " + enemies.Count);
+        //if (kb.isPressed(Keys.Space))
+        //{
+        //    Sprite target = null;
+        //    float best = 150;
 
-            Color[] px = new Color[1024 * 1024];
-            for (int y = 0; y < 1024; y++)
-            {
-                for (int x = 0; x < 1024; x++)
-                {
-                    float d = (float)Math.Sqrt((x - 512) * (x - 512) + (y - 512) * (y - 512));
+        //    foreach(var e in enemies)
+        //    {
+        //        float d = Vector2.Distance(e.position, player.position);
+        //        if (d <= best)
+        //        {
+        //            best = d;
+        //            target = e;
+        //        }
+        //    }
 
-                    if (d < 40) px[y * 1024 + x] = new Color(0, 0, 0, 0);
-                    else if (d < 50) px[y * 1024 + x] = new Color(0, 0, 0, (int)(255 * ((d - 40) / 10)));
-                    else px[y * 1024 + x] = Color.Black;
-                }
-            }
+        //    if (target != null)
+        //    {
+        //        enemies.Remove(target);
+        //        Debug.WriteLine("kill, left: " + enemies.Count);
+        //    }
+        //}
 
-            dark = new Texture2D(GraphicsDevice, 1024, 1024);
-            dark.SetData(px);
-        }
+        //player.Update(gameTime, kb);
 
-        protected override void Update(GameTime gameTime)
-        {
-            kb.update();
+        //foreach(var e in enemies)
+        //{
+        //    e.Update(gameTime, kb);
+        //}
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || kb.isDown(Keys.Escape)) Exit();
+        //cam.update(player.position);
 
-            if (kb.isPressed(Keys.Space))
-            {
-                Sprite target = null;
-                float best = 150;
+        base.Update(gameTime);
+    }
 
-                foreach(var e in enemies)
-                {
-                    float d = Vector2.Distance(e.position, player.position);
-                    if (d <= best)
-                    {
-                        best = d;
-                        target = e;
-                    }
-                }
+    protected override void Draw(GameTime gameTime)
+    {
+        GraphicsDevice.Clear(Color.White);
 
-                if (target != null)
-                {
-                    enemies.Remove(target);
-                    Debug.WriteLine("kill, left: " + enemies.Count);
-                }
-            }
+        // SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: cam.getMatrix());
+        SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-            player.Update(gameTime, kb);
+        playerScript.Draw(SpriteBatch);
 
-            foreach(var e in enemies)
-            {
-                e.Update(gameTime, kb);
-            }
+        //foreach(var e in enemies)
+        //{
+        //    e.Draw(SpriteBatch);
+        //}
+        //player.Draw(SpriteBatch);
 
-            cam.update(player.position);
+        // SpriteBatch.Draw(dark, player.position - cam.pos, null, Color.White, 0, new Vector2(dark.Width / 2, dark.Height / 2), 4, SpriteEffects.None, 0);
 
-            base.Update(gameTime);
-        }
+        SpriteBatch.End();
 
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.White);
-
-            spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: cam.getMatrix());
-
-            foreach(var e in enemies)
-            {
-                e.Draw(spriteBatch);
-            }
-            player.Draw(spriteBatch);
-
-            spriteBatch.End();
-
-            spriteBatch.Begin();
-            spriteBatch.Draw(dark, player.position - cam.pos, null, Color.White, 0, new Vector2(dark.Width / 2, dark.Height / 2), 4, SpriteEffects.None, 0);
-            spriteBatch.End();
-
-            base.Draw(gameTime);
-        }
+        base.Draw(gameTime);
     }
 }

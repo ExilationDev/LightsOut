@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="LIGHT THE EXIT/LIGHT THE EXIT.csproj" />
+  <Project Path="MonoGameLibrary/MonoGameLibrary.csproj" Id="544272bb-b912-4394-88ff-a3e53f2427be" />
 </Solution>
