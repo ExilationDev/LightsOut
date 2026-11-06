@@ -22,7 +22,7 @@ public class Game1 : Core
 
     //Camera cam = new Camera();
 
-    PlayerScript playerScript;
+    private PlayerScript playerScript;
 
     public Game1() : base("Lights Out", 1280, 720, false) {}
 
@@ -81,6 +81,7 @@ public class Game1 : Core
 
     protected override void Update(GameTime gameTime)
     {
+        playerScript.Update(gameTime);
         //kb.update();
 
         //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || kb.isDown(Keys.Escape)) Exit();

@@ -2,6 +2,18 @@
 <TextureAtlas>
 	<Texture>sprites/player_idle_spritesheet</Texture>
 	<Regions>
-		<Region name="player" x="0" y="0" width="32" height="32" />
+		<Region name="playeridlefront-1" x="0" y="0" width="32" height="32" />
+		<Region name="playeridlefront-2" x="32" y="0" width="32" height="32" />
+		<Region name="playeridlefront-3" x="64" y="0" width="32" height="32" />
+		<Region name="playeridlefront-4" x="96" y="0" width="32" height="32" />
 	</Regions>
+	<Animations>
+		<Animation name="playeridlefront-animation" delay="200">
+			<Frame region="playeridlefront-1"/>
+			<Frame region="playeridlefront-2"/>
+			<Frame region="playeridlefront-3"/>
+			<Frame region="playeridlefront-2"/>
+			<Frame region="playeridlefront-4"/>
+		</Animation>
+	</Animations>
 </TextureAtlas>
