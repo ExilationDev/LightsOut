@@ -12,7 +12,6 @@
 			<Frame region="playeridlefront-1"/>
 			<Frame region="playeridlefront-2"/>
 			<Frame region="playeridlefront-3"/>
-			<Frame region="playeridlefront-2"/>
 			<Frame region="playeridlefront-4"/>
 		</Animation>
 	</Animations>

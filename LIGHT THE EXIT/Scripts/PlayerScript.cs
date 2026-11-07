@@ -1,13 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
 
 namespace LightTheExit.Scripts;
 
-internal class PlayerScript
+public class PlayerScript
 {
-    AnimatedSprite playerTexture;
+    private const float PLAYER_MOVEMENT_SPEED = 4.0f;
+
+    private Vector2 playerPos;
+    private AnimatedSprite playerTexture;
 
     public PlayerScript() {}
 
@@ -22,10 +27,37 @@ internal class PlayerScript
     public void Update(GameTime gameTime)
     {
         playerTexture.Update(gameTime);
+
+        CheckKeyboardInput();
     }
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        playerTexture.Draw(spriteBatch, Vector2.Zero);
+        playerTexture.Draw(spriteBatch, playerPos);
+    }
+
+    private void CheckKeyboardInput()
+    {
+        float speed = PLAYER_MOVEMENT_SPEED;
+         
+        if (Core.Input.Keyboard.IsKeyDown(Keys.W) || Core.Input.Keyboard.IsKeyDown(Keys.Up))
+        {
+            playerPos.Y -= speed;
+        }
+
+        if (Core.Input.Keyboard.IsKeyDown(Keys.S) || Core.Input.Keyboard.IsKeyDown(Keys.Down))
+        {
+            playerPos.Y += speed;
+        }
+
+        if (Core.Input.Keyboard.IsKeyDown(Keys.A) || Core.Input.Keyboard.IsKeyDown(Keys.Left))
+        {
+            playerPos.X -= speed;
+        }
+
+        if (Core.Input.Keyboard.IsKeyDown(Keys.D) || Core.Input.Keyboard.IsKeyDown(Keys.Right))
+        {
+            playerPos.X += speed;
+        }
     }
 }
