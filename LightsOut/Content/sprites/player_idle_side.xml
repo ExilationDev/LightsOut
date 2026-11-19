@@ -1,0 +1,14 @@
+<!-- standing still, facing left/right (code flips it for left) -->
+<TextureAtlas>
+	<Texture>sprites/Jessiee_horizontal_idle_animation</Texture>
+	<Regions>
+		<Region name="f1" x="0"  y="0" width="16" height="32" />
+		<Region name="f2" x="16" y="0" width="16" height="32" />
+	</Regions>
+	<Animations>
+		<Animation name="idle-side" delay="200">
+			<Frame region="f1"/>
+			<Frame region="f2"/>
+		</Animation>
+	</Animations>
+</TextureAtlas>

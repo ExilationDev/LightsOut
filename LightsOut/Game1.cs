@@ -1,52 +1,44 @@
-﻿using Microsoft.Xna.Framework;
+using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using MonoGameLibrary;
+using LightsOut.Scripts;
 
-namespace LightsOut
+namespace LightsOut;
+
+public class Game1 : Core
 {
-    public class Game1 : Game
+    private PlayerScript playerScript;
+
+    public Game1() : base("Lights Out", 1280, 720, false) {}
+
+    protected override void Initialize()
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        playerScript = new PlayerScript();
+        base.Initialize();
+    }
 
-        public Game1()
+    protected override void LoadContent()
+    {
+        playerScript.LoadContent(Content);
+    }
+
+    protected override void Update(GameTime gameTime)
+    {
+        playerScript.Update(gameTime);
+
+        base.Update(gameTime);
+    }
+
+    protected override void Draw(GameTime gameTime)
+    {
+        GraphicsDevice.Clear(Color.White);
+        SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
         {
-            _graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
-            IsMouseVisible = true;
+            playerScript.Draw(SpriteBatch);
         }
+        SpriteBatch.End();
 
-        protected override void Initialize()
-        {
-            // TODO: Add your initialization logic here
-
-            base.Initialize();
-        }
-
-        protected override void LoadContent()
-        {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
-        }
-
-        protected override void Update(GameTime gameTime)
-        {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-            // TODO: Add your update logic here
-
-            base.Update(gameTime);
-        }
-
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-
-            base.Draw(gameTime);
-        }
+        base.Draw(gameTime);
     }
 }
