@@ -12,10 +12,10 @@ public class PlayerScript
 {
     private const float PLAYER_MOVEMENT_SPEED = 4.0f;
 
-    private Vector2 playerPos;
+    public Vector2 playerPosition;
 
-    private Vector2 inputMovement;
-    private AnimatedSprite playerTexture;
+    private Vector2 _inputMovement;
+    private AnimatedSprite _playerTexture;
 
     public PlayerScript() {}
 
@@ -23,34 +23,34 @@ public class PlayerScript
     {
         TextureAtlas atlas = TextureAtlas.FromFile(content, "sprites/player_atlas.xml");
 
-        playerTexture = atlas.CreateAnimatedSprite("playeridlefront-animation");
-        playerTexture.Scale = new Vector2(4, 4);
+        _playerTexture = atlas.CreateAnimatedSprite("playeridlefront-animation");
+        _playerTexture.Scale = new Vector2(4, 4);
     }
 
     public void Update(GameTime gameTime)
     {
-        playerTexture.Update(gameTime);
+        _playerTexture.Update(gameTime);
 
         CheckKeyboardInput();
     }
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        playerTexture.Draw(spriteBatch, playerPos);
+        _playerTexture.Draw(spriteBatch, playerPosition);
     }
 
     private void CheckKeyboardInput()
     {
         float speed = PLAYER_MOVEMENT_SPEED;
 
-        inputMovement = new Vector2(
+        _inputMovement = new Vector2(
             (Core.Input.Keyboard.IsKeyDown(Keys.A) || Core.Input.Keyboard.IsKeyDown(Keys.Left) ? -1 : 0) +
             (Core.Input.Keyboard.IsKeyDown(Keys.D) || Core.Input.Keyboard.IsKeyDown(Keys.Right) ? 1 : 0),
             (Core.Input.Keyboard.IsKeyDown(Keys.W) || Core.Input.Keyboard.IsKeyDown(Keys.Up) ? -1 : 0) +
             (Core.Input.Keyboard.IsKeyDown(Keys.S) || Core.Input.Keyboard.IsKeyDown(Keys.Down) ? 1 : 0)
         );
 
-        playerPos += NormalizeSafe(inputMovement) * speed;
+        playerPosition += NormalizeSafe(_inputMovement) * speed;
     }
 
     Vector2 NormalizeSafe(Vector2 pos)

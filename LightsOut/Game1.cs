@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary;
@@ -9,13 +8,14 @@ namespace LightsOut;
 public class Game1 : Core
 {
     private PlayerScript playerScript;
-
+    private CameraScript cameraScript;
     public Game1() : base("Lights Out", 1280, 720, false) {}
 
     protected override void Initialize()
     {
         playerScript = new PlayerScript();
         base.Initialize();
+        cameraScript = new CameraScript(GraphicsDevice.Viewport);
     }
 
     protected override void LoadContent()
@@ -26,6 +26,10 @@ public class Game1 : Core
     protected override void Update(GameTime gameTime)
     {
         playerScript.Update(gameTime);
+        cameraScript.Update(gameTime);
+
+        // TODO: make this thing work
+        cameraScript.position = playerScript.playerPosition;
 
         base.Update(gameTime);
     }
