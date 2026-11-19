@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.37827.9 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightsOut", "LightsOut\LightsOut.csproj", "{590A3EE4-F20F-498A-B60D-80BE6874048B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGameLibrary", "MonoGameLibrary\MonoGameLibrary.csproj", "{240E19DC-696D-409C-A5C2-FD0D16C92A62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{590A3EE4-F20F-498A-B60D-80BE6874048B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{590A3EE4-F20F-498A-B60D-80BE6874048B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{590A3EE4-F20F-498A-B60D-80BE6874048B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{240E19DC-696D-409C-A5C2-FD0D16C92A62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{240E19DC-696D-409C-A5C2-FD0D16C92A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{240E19DC-696D-409C-A5C2-FD0D16C92A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{240E19DC-696D-409C-A5C2-FD0D16C92A62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
