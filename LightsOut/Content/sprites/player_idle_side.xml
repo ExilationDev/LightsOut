@@ -1,4 +1,5 @@
-<!-- standing still, facing left/right (code flips it for left) -->
+<!-- standing still, facing left/right (code flips it for left) 
+example mirroring animation-->
 <TextureAtlas>
 	<Texture>sprites/Jessiee_horizontal_idle_animation</Texture>
 	<Regions>
