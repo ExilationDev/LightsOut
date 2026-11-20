@@ -24,7 +24,8 @@ public class PlayerScript
         TextureAtlas atlas = TextureAtlas.FromFile(content, "sprites/player_atlas.xml");
 
         _playerTexture = atlas.CreateAnimatedSprite("playeridlefront-animation");
-        _playerTexture.Scale = new Vector2(4, 4);
+        _playerTexture.Scale = Vector2.One * 3;
+        _playerTexture.CenterOrigin();
     }
 
     public void Update(GameTime gameTime)

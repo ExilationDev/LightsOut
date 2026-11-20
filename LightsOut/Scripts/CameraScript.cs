@@ -1,49 +1,46 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGameLibrary;
 
-namespace LightsOut.Scripts;
-
-class CameraScript
+public class CameraScript
 {
-    public static CameraScript camera { get; set; }
+    public Vector2 Position { get; set; } = Vector2.Zero;
+    public Vector2 PositionOffset { get; set; } = Vector2.Zero;
+    public float Zoom { get; set; } = 1f;
+    public float Rotation { get; set; } = 0f;
 
-    private int _scrollValue = 1000;
-    private float _clampedScrollValue;
-    private int _minScrollValue = -1000;
-    private int _maxScrollValue = 1000;
-
-    private Matrix currentViewMatrix { get; set; }
-
-    private float _camSpeed = 25;
-    public readonly Viewport _viewport;
-
-    public Vector2 position { get; set; }
-
-    public float zoom = 1.0f;
-    private Vector2 origin { get; set; }
+    private readonly Viewport _viewport;
 
     public CameraScript(Viewport viewport)
     {
         _viewport = viewport;
-        this.position = Vector2.Zero;
-        origin = new Vector2(_viewport.Width / 2f, _viewport.Height / 2f);
-        camera = this;
     }
 
-    Matrix GetViewMatrix()
+    public CameraScript(Viewport viewport, Vector2 positionOffset)
     {
-        return
-            Matrix.CreateTranslation(new Vector3(-this.position, 0.0f)) *
-            Matrix.CreateTranslation(new Vector3(-origin, 0.0f)) *
-            Matrix.CreateRotationZ(0) *
-            Matrix.CreateScale(zoom, zoom, 1) *
-            Matrix.CreateTranslation(new Vector3(origin, 0.0f));
+        _viewport = viewport;
+        PositionOffset = positionOffset;
     }
 
-    public void Update(GameTime gameTime)
+    public Matrix GetViewMatrix()
     {
-        // TODO: make the camera move
-        currentViewMatrix = GetViewMatrix();
+        return Matrix.CreateTranslation(new Vector3(-Position.X - PositionOffset.X, -Position.Y - PositionOffset.Y, 0)) *
+               Matrix.CreateRotationZ(Rotation) *
+               Matrix.CreateScale(Zoom, Zoom, 1f) *
+               Matrix.CreateTranslation(new Vector3(_viewport.Width * 0.5f, _viewport.Height * 0.5f, 0));
+    }
+
+    public void Follow(Vector2 targetPosition, float lerpAmount = 0.15f)
+    {
+        Position = Vector2.Lerp(Position, targetPosition, lerpAmount);
+    }
+
+    public Vector2 ScreenToWorld(Vector2 screenPosition)
+    {
+        return Vector2.Transform(screenPosition, Matrix.Invert(GetViewMatrix()));
+    }
+
+    public Vector2 WorldToScreen(Vector2 worldPosition)
+    {
+        return Vector2.Transform(worldPosition, GetViewMatrix());
     }
 }

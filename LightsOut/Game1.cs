@@ -1,7 +1,9 @@
+using System;
+using LightsOut.Scripts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary;
-using LightsOut.Scripts;
 
 namespace LightsOut;
 
@@ -15,7 +17,7 @@ public class Game1 : Core
     {
         playerScript = new PlayerScript();
         base.Initialize();
-        cameraScript = new CameraScript(GraphicsDevice.Viewport);
+        cameraScript = new CameraScript(GraphicsDevice.Viewport, new Vector2(0, 35));
     }
 
     protected override void LoadContent()
@@ -26,10 +28,8 @@ public class Game1 : Core
     protected override void Update(GameTime gameTime)
     {
         playerScript.Update(gameTime);
-        cameraScript.Update(gameTime);
 
-        // TODO: make this thing work
-        cameraScript.position = playerScript.playerPosition;
+        cameraScript.Follow(playerScript.playerPosition);
 
         base.Update(gameTime);
     }
@@ -37,7 +37,7 @@ public class Game1 : Core
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.White);
-        SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+        SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: cameraScript.GetViewMatrix());
         {
             playerScript.Draw(SpriteBatch);
         }
