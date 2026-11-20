@@ -1,4 +1,10 @@
-<!-- standing still, facing up: 128x32 sheet = 8 frames of 16x32 (x = 0,16,32,48,64,80,96,112) -->
+<!-- standing still, facing up: 128x32 sheet = 8 frames of 16x32 (x = 0,16,32,48,64,80,96,112) 
+ambot tama ba ni i describe
+katugon nako
+
+128 = wide
+32 = height
+para makita ang texture to ensure smooth ang pag pakita sa frame-->
 <TextureAtlas>
 	<Texture>sprites/Jessiee_idle_up</Texture>
 	<Regions>

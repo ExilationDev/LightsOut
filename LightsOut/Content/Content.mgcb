@@ -13,7 +13,7 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin ../../../../../Downloads/Jessiee_down_walking_animation.png
+#begin sprites/Jessiee_down_walking_animation.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -24,46 +24,7 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
-/build:../../../../../Downloads/Jessiee_down_walking_animation.png;sprites/Jessiee_down_walking_animation.png
-
-#begin ../../../../../Downloads/Jessiee_idle_down.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/processorParam:Version=3.8.5.1
-/build:../../../../../Downloads/Jessiee_idle_down.png;sprites/Jessiee_idle_down.png
-
-#begin 244d8923-fe04-4759-a334-075b5e92b9bf.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/processorParam:Version=3.8.6.0
-/build:244d8923-fe04-4759-a334-075b5e92b9bf.png
-
-#begin ccc1edbf-3773-4c27-b3d6-beb59b49dcd8.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/processorParam:Version=3.8.6.0
-/build:ccc1edbf-3773-4c27-b3d6-beb59b49dcd8.png
+/build:sprites/Jessiee_down_walking_animation.png
 
 #begin sprites/Jessiee_horizontal_idle_animation.png
 /importer:TextureImporter
@@ -77,6 +38,19 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:sprites/Jessiee_horizontal_idle_animation.png
+
+#begin sprites/Jessiee_idle_down.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:sprites/Jessiee_idle_down.png
 
 #begin sprites/Jessiee_idle_up.png
 /importer:TextureImporter
@@ -135,3 +109,56 @@
 /processorParam:Version=3.8.6.0
 /build:sprites/player_idle_spritesheet.png
 
+# Old entries kept as comments (not built):
+#
+# #begin ../../../../../Downloads/Jessiee_down_walking_animation.png
+# /importer:TextureImporter
+# /processor:TextureProcessor
+# /processorParam:ColorKeyColor=255,0,255,255
+# /processorParam:ColorKeyEnabled=True
+# /processorParam:GenerateMipmaps=False
+# /processorParam:PremultiplyAlpha=True
+# /processorParam:ResizeToPowerOfTwo=False
+# /processorParam:MakeSquare=False
+# /processorParam:TextureFormat=Color
+# /processorParam:Version=3.8.5.1
+# /build:../../../../../Downloads/Jessiee_down_walking_animation.png;sprites/Jessiee_down_walking_animation.png
+#
+# #begin ../../../../../Downloads/Jessiee_idle_down.png
+# /importer:TextureImporter
+# /processor:TextureProcessor
+# /processorParam:ColorKeyColor=255,0,255,255
+# /processorParam:ColorKeyEnabled=True
+# /processorParam:GenerateMipmaps=False
+# /processorParam:PremultiplyAlpha=True
+# /processorParam:ResizeToPowerOfTwo=False
+# /processorParam:MakeSquare=False
+# /processorParam:TextureFormat=Color
+# /processorParam:Version=3.8.5.1
+# /build:../../../../../Downloads/Jessiee_idle_down.png;sprites/Jessiee_idle_down.png
+#
+# #begin 244d8923-fe04-4759-a334-075b5e92b9bf.png
+# /importer:TextureImporter
+# /processor:TextureProcessor
+# /processorParam:ColorKeyColor=255,0,255,255
+# /processorParam:ColorKeyEnabled=True
+# /processorParam:GenerateMipmaps=False
+# /processorParam:PremultiplyAlpha=True
+# /processorParam:ResizeToPowerOfTwo=False
+# /processorParam:MakeSquare=False
+# /processorParam:TextureFormat=Color
+# /processorParam:Version=3.8.6.0
+# /build:244d8923-fe04-4759-a334-075b5e92b9bf.png
+#
+# #begin ccc1edbf-3773-4c27-b3d6-beb59b49dcd8.png
+# /importer:TextureImporter
+# /processor:TextureProcessor
+# /processorParam:ColorKeyColor=255,0,255,255
+# /processorParam:ColorKeyEnabled=True
+# /processorParam:GenerateMipmaps=False
+# /processorParam:PremultiplyAlpha=True
+# /processorParam:ResizeToPowerOfTwo=False
+# /processorParam:MakeSquare=False
+# /processorParam:TextureFormat=Color
+# /processorParam:Version=3.8.6.0
+# /build:ccc1edbf-3773-4c27-b3d6-beb59b49dcd8.png
