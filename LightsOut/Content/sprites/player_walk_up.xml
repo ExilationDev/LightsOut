@@ -1,4 +1,8 @@
-<!-- walking up: 96x32 sheet = 6 frames of 16x32 (x = 0,16,32,48,64,80) -->
+<!-- walking up: 96x32 sheet = 6 frames of 16x32 (x = 0,16,32,48,64,80) 
+kini pud bai, ngano 96 by 32 man?
+to able to see the pixel sa taas kay maputol ang ulo 
+kada lihok sa movement sa player same 
+same describe ranako basta katugon nako-->
 <TextureAtlas>
 	<Texture>sprites/Jessiee_up_walking_animation</Texture>
 	<Regions>
