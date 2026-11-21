@@ -16,3 +16,32 @@
 		</Animation>
 	</Animations>
 </TextureAtlas>
+
+
+<!--
+<TextureAtlas>
+	<Texture>sprites/Jessiee_idle_down</Texture>
+	<Regions>
+		<Region name="playeridlefront-1" x="0" y="0" width="16" height="32" />
+		<Region name="playeridlefront-2" x="32" y="0" width="16" height="32" />
+		<Region name="playeridlefront-3" x="64" y="0" width="16" height="32" />
+		<Region name="playeridlefront-4" x="96" y="0" width="16" height="32" />
+		<Region name="playeridlefront-5" x="3" y="0" width="16" height="32" />
+		<Region name="playeridlefront-6" x="32" y="0" width="16" height="32" />
+		<Region name="playeridlefront-7" x="64" y="0" width="16" height="32" />
+		<Region name="playeridlefront-8" x="32" y="0" width="16" height="32" />
+	</Regions>
+	<Animations>
+		<Animation name="playeridlefront-animation" delay="110">
+			<Frame region="playeridlefront-1"/>
+			<Frame region="playeridlefront-2"/>
+			<Frame region="playeridlefront-3"/>
+			<Frame region="playeridlefront-4"/>
+			<Frame region="playeridlefront-5"/>
+			<Frame region="playeridlefront-6"/>
+			<Frame region="playeridlefront-7"/>
+			<Frame region="playeridlefront-8"/>
+		</Animation>
+	</Animations>
+</TextureAtlas>
+-->
