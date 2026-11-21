@@ -1,0 +1,26 @@
+<!-- walking down: 96x32 sheet = 6 frames of 16x32 (x = 0,16,32,48,64,80) 
+kini pud bai, ngano 96 by 32 man?
+to able to see the pixel sa taas kay maputol ang ulo 
+kada lihok sa movement sa player same 
+same describe ranako basta katugon nako-->
+<TextureAtlas>
+	<Texture>sprites/Jessiee_down_walking_animation</Texture>
+	<Regions>
+		<Region name="walk-down-1" x="0"  y="0" width="16" height="32" />
+		<Region name="walk-down-2" x="16" y="0" width="16" height="32" />
+		<Region name="walk-down-3" x="32" y="0" width="16" height="32" />
+		<Region name="walk-down-4" x="48" y="0" width="16" height="32" />
+		<Region name="walk-down-5" x="64" y="0" width="16" height="32" />
+		<Region name="walk-down-6" x="80" y="0" width="16" height="32" />
+	</Regions>
+	<Animations>
+		<Animation name="walk-down" delay="200">
+			<Frame region="walk-down-1"/>
+			<Frame region="walk-down-2"/>
+			<Frame region="walk-down-3"/>
+			<Frame region="walk-down-4"/>
+			<Frame region="walk-down-5"/>
+			<Frame region="walk-down-6"/>
+		</Animation>
+	</Animations>
+</TextureAtlas>
