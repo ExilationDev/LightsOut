@@ -32,7 +32,7 @@ public class PlayerScript
         walkSide = LoadAnimation(content, "sprites/jessiee_atlas.xml", "p_walk_side_anim");
         walkFront = LoadAnimation(content, "sprites/jessiee_atlas.xml", "p_walk_front_anim");
 
-        currentSprite = idleBack;
+        prevMovement = new Vector2(0, 1);
     }
 
 
@@ -65,7 +65,11 @@ public class PlayerScript
             return (prevMovement.X, prevMovement.Y) switch
             {
                 (0, 1) => idleBack,
+                (1, 1) => idleBack,
+                (-1, 1) => idleBack,
                 (0, -1) => idleFront,
+                (1, -1) => idleFront,
+                (-1, -1) => idleFront,
                 _ => idleSide
             };
         }
@@ -73,7 +77,11 @@ public class PlayerScript
         return (inputMovement.X, inputMovement.Y) switch
         {
             (0, 1) => walkBack,
+            (1, 1) => walkBack,
+            (-1, 1) => walkBack,
             (0, -1) => walkFront,
+            (1, -1) => walkFront,
+            (-1, -1) => walkFront,
             _ => walkSide
         };
     }

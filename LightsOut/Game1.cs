@@ -1,9 +1,8 @@
-using System;
 using LightsOut.Scripts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary;
+using MonoGame.Extended;
 
 namespace LightsOut;
 

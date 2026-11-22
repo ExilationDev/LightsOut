@@ -11,6 +11,11 @@
 		<Region name="p_idle_back_7" x="96" y="0" width="16" height="32" />
 		<Region name="p_idle_side_1" x="0" y="32" width="16" height="32" />
 		<Region name="p_idle_side_2" x="16" y="32" width="16" height="32" />
+		<Region name="p_idle_side_3" x="32" y="32" width="16" height="32" />
+		<Region name="p_idle_side_4" x="48" y="32" width="16" height="32" />
+		<Region name="p_idle_side_5" x="64" y="32" width="16" height="32" />
+		<Region name="p_idle_side_6" x="80" y="32" width="16" height="32" />
+		<Region name="p_idle_side_7" x="96" y="32" width="16" height="32" />
 		<Region name="p_idle_front_1" x="0" y="64" width="16" height="32" />
 		<Region name="p_idle_front_2" x="16" y="64" width="16" height="32" />
 		<Region name="p_idle_front_3" x="32" y="64" width="16" height="32" />
@@ -52,6 +57,11 @@
 			<Frame region="p_idle_side_1"/>
 			<Frame region="p_idle_side_1"/>
 			<Frame region="p_idle_side_2"/>
+			<Frame region="p_idle_side_3"/>
+			<Frame region="p_idle_side_4"/>
+			<Frame region="p_idle_side_5"/>
+			<Frame region="p_idle_side_6"/>
+			<Frame region="p_idle_side_7"/>
 		</Animation>
 		<Animation name="p_idle_front_anim" delay="200">
 			<Frame region="p_idle_front_1"/>
