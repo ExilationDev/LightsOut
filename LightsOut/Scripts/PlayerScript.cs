@@ -13,7 +13,8 @@ public class PlayerScript
 {
     private const float PLAYER_MOVEMENT_SPEED = 4.0f;
 
-    public Vector2 playerPosition;
+    private Vector2 playerPosition;
+    public Vector2 PlayerPosition { get { return playerPosition; } set { playerPosition = value; } }
     private Vector2 inputMovement;
     private Vector2 prevMovement;
 
@@ -54,7 +55,6 @@ public class PlayerScript
 
     public void Draw(SpriteBatch spriteBatch)
     {
-
         currentSprite.Draw(spriteBatch, playerPosition);
     }
 

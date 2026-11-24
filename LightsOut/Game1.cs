@@ -1,4 +1,5 @@
 using LightsOut.Scripts;
+using LightsOut.Scripts.WorldGen;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary;
@@ -10,7 +11,8 @@ public class Game1 : Core
 {
     private PlayerScript playerScript;
     private CameraScript cameraScript;
-    public Game1() : base("Lights Out", 1280, 720, false) {}
+
+    public Game1() : base("Lights Out", 1920, 1080, false) {}
 
     protected override void Initialize()
     {
@@ -28,7 +30,9 @@ public class Game1 : Core
     {
         playerScript.Update(gameTime);
 
-        cameraScript.Follow(playerScript.playerPosition);
+        cameraScript.Follow(playerScript.PlayerPosition);
+
+        playerScript.PlayerPosition = RandomPoint.GetRandomPointInCircle(100);
 
         base.Update(gameTime);
     }

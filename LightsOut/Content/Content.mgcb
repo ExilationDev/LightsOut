@@ -29,6 +29,32 @@
 /processorParam:Version=3.8.5.1
 /build:sprites/jessiee_spritesheet.png
 
+#begin sprites/prototype/dungeon_tileset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:sprites/prototype/dungeon_tileset.png;sprites/prototype/dungeon_tileset
+
+#begin sprites/prototype/dungeongen_tileset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:sprites/prototype/dungeongen_tileset.png;sprites/prototype/dungeongen_tileset
+
 #begin sprites/prototype/player_idle_spritesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -41,4 +67,7 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:sprites/prototype/player_idle_spritesheet.png
+
+#begin sprites/prototype/prototype_tileset.xml
+/copy:sprites/prototype/prototype_tileset.xml
 
