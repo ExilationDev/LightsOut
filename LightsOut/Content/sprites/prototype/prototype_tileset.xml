@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tilemap>
+	<Tileset region="0 0 32 16" tileWidth="16" tileHeight="16">sprites/prototype/dungeongen_tileset</Tileset>
+	<Tiles>
+		00 00 00 00 00 00
+		00 01 01 01 01 00
+		00 01 01 01 01 00
+		00 00 00 00 00 00
+	</Tiles>
+</Tilemap>
