@@ -7,14 +7,14 @@ namespace LightsOut;
 
 public class Game1 : Core
 {
-    private PlayerScript playerScript;
+    private Player playerScript;
     private CameraScript cameraScript;
 
     public Game1() : base("Lights Out", 1920, 1080, false) {}
 
     protected override void Initialize()
     {
-        playerScript = new PlayerScript();
+        playerScript = new Player();
         base.Initialize();
         cameraScript = new CameraScript(GraphicsDevice.Viewport, new Vector2(0, -35));
     }
@@ -28,7 +28,7 @@ public class Game1 : Core
     {
         playerScript.Update(gameTime);
 
-        cameraScript.Follow(playerScript.PlayerPosition);
+        // cameraScript.Follow(playerScript.PlayerPosition);
 
         base.Update(gameTime);
     }

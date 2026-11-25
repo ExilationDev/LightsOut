@@ -6,26 +6,22 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Graphics;
 using MonoGame.Extended.Animations;
 using MonoGameLibrary;
+using System.Diagnostics;
 
 namespace LightsOut.Scripts;
 
-public class PlayerScript
+public class Player : Entity
 {
-    private const float PLAYER_MOVEMENT_SPEED = 4.0f;
-
-    private Vector2 playerPosition;
     private Vector2 inputMovement;
     private Vector2 prevMovement;
 
-    public Vector2 PlayerPosition { get { return playerPosition; } set { playerPosition = value; } }
+    public Vector2 PlayerPosition { get { return entityPosition; } set { entityPosition = value; } }
 
-    private SpriteSheet spriteSheet;
-    private AnimatedSprite playerSprite;
-    private string currentAnimation;
+    public Player() {
+        entitySpeed = 5;
+    }
 
-    public PlayerScript() { }
-
-    public void LoadContent(ContentManager content)
+    public override void LoadContent(ContentManager content)
     {
         Texture2DAtlas atlas = content.Load<Texture2DAtlas>("sprites/data/jessiee");
         spriteSheet = new SpriteSheet("sprites/jessiee_spritesheet", atlas);
@@ -35,16 +31,16 @@ public class PlayerScript
         prevMovement = new Vector2(0, 1);
     }
 
-    public void Update(GameTime gameTime)
+    public override void Update(GameTime gameTime)
     {
         CheckKeyboardInput();
-        playerSprite.Update(gameTime);
+        animatedSprite.Update(gameTime);
     }
 
-    public void Draw(SpriteBatch spriteBatch)
+    public override void Draw(SpriteBatch spriteBatch)
     {
         int scale = 4;
-        spriteBatch.Draw(playerSprite, playerPosition, 0, new Vector2(scale));
+        spriteBatch.Draw(animatedSprite, entityPosition, 0, new Vector2(scale));
     }
 
     private void UpdateAnimation()
@@ -52,7 +48,7 @@ public class PlayerScript
         bool isMoving = inputMovement.LengthSquared() > 0;
         Vector2 dir = isMoving ? inputMovement : prevMovement;
 
-        playerSprite.Effect = dir.X < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+        animatedSprite.Effect = dir.X < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
         string action = isMoving ? "walk" : "idle";
         string facing = dir.Y switch
@@ -66,7 +62,7 @@ public class PlayerScript
         if (currentAnimation != nextAnimation)
         {
             currentAnimation = nextAnimation;
-            playerSprite.SetAnimation(nextAnimation);
+            animatedSprite.SetAnimation(nextAnimation);
         }
     }
 
@@ -141,12 +137,12 @@ public class PlayerScript
             .AddFrame("jessiee_walk_front_006", TimeSpan.FromSeconds(0.2));
         });
 
-        playerSprite = new AnimatedSprite(spriteSheet, "idle_back");
+        animatedSprite = new AnimatedSprite(spriteSheet, "idle_back");
     }
 
     private void CheckKeyboardInput()
     {
-        float speed = PLAYER_MOVEMENT_SPEED;
+        float speed = entitySpeed;
 
         if (inputMovement.Length() > 0) prevMovement = inputMovement;
         inputMovement = new Vector2(
@@ -156,8 +152,7 @@ public class PlayerScript
             (Core.Input.Keyboard.IsKeyDown(Keys.S) || Core.Input.Keyboard.IsKeyDown(Keys.Down) ? 1 : 0)
         );
 
-        playerPosition += NormalizeSafe(inputMovement) * speed;
-
+        entityPosition += NormalizeSafe(inputMovement) * speed;
         UpdateAnimation();
     }
 
