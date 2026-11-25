@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended.Graphics;
+using MonoGame.Extended.Animations;
 using MonoGameLibrary;
-using MonoGameLibrary.Graphics;
 
 namespace LightsOut.Scripts;
 
@@ -14,76 +14,134 @@ public class PlayerScript
     private const float PLAYER_MOVEMENT_SPEED = 4.0f;
 
     private Vector2 playerPosition;
-    public Vector2 PlayerPosition { get { return playerPosition; } set { playerPosition = value; } }
     private Vector2 inputMovement;
     private Vector2 prevMovement;
 
-    private AnimatedSprite currentSprite;
-    private AnimatedSprite idleBack, idleSide, idleFront;
-    private AnimatedSprite walkBack, walkSide, walkFront;
+    public Vector2 PlayerPosition { get { return playerPosition; } set { playerPosition = value; } }
+
+    private SpriteSheet spriteSheet;
+    private AnimatedSprite playerSprite;
+    private string currentAnimation;
 
     public PlayerScript() { }
 
     public void LoadContent(ContentManager content)
     {
-        idleBack = LoadAnimation(content, "sprites/jessiee_atlas.xml", "p_idle_back_anim");
-        idleSide = LoadAnimation(content, "sprites/jessiee_atlas.xml", "p_idle_side_anim");
-        idleFront = LoadAnimation(content, "sprites/jessiee_atlas.xml", "p_idle_front_anim");
-        walkBack = LoadAnimation(content, "sprites/jessiee_atlas.xml", "p_walk_back_anim");
-        walkSide = LoadAnimation(content, "sprites/jessiee_atlas.xml", "p_walk_side_anim");
-        walkFront = LoadAnimation(content, "sprites/jessiee_atlas.xml", "p_walk_front_anim");
+        Texture2DAtlas atlas = content.Load<Texture2DAtlas>("sprites/data/jessiee");
+        spriteSheet = new SpriteSheet("sprites/jessiee_spritesheet", atlas);
+
+        DefineAnimations(content, spriteSheet);
 
         prevMovement = new Vector2(0, 1);
-    }
-
-
-    private static AnimatedSprite LoadAnimation(ContentManager content, string atlasFile, string animationName)
-    {
-        TextureAtlas atlas = TextureAtlas.FromFile(content, atlasFile);
-        AnimatedSprite sprite = atlas.CreateAnimatedSprite(animationName);
-        sprite.Scale = Vector2.One * 4;
-        sprite.CenterOrigin();
-        return sprite;
     }
 
     public void Update(GameTime gameTime)
     {
         CheckKeyboardInput();
-        currentSprite = ChooseAnimation();
-        currentSprite.Update(gameTime);
+        playerSprite.Update(gameTime);
     }
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        currentSprite.Draw(spriteBatch, playerPosition);
+        int scale = 4;
+        spriteBatch.Draw(playerSprite, playerPosition, 0, new Vector2(scale));
     }
 
-    private AnimatedSprite ChooseAnimation()
+    private void UpdateAnimation()
     {
-        if (inputMovement.Length() <= 0) {
-            idleSide.Effects = prevMovement.X < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-            return (prevMovement.X, prevMovement.Y) switch
-            {
-                (0, 1) => idleBack,
-                (1, 1) => idleBack,
-                (-1, 1) => idleBack,
-                (0, -1) => idleFront,
-                (1, -1) => idleFront,
-                (-1, -1) => idleFront,
-                _ => idleSide
-            };
-        }
-        walkSide.Effects = inputMovement.X < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-        return (inputMovement.X, inputMovement.Y) switch
+        bool isMoving = inputMovement.LengthSquared() > 0;
+        Vector2 dir = isMoving ? inputMovement : prevMovement;
+
+        playerSprite.Effect = dir.X < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+
+        string action = isMoving ? "walk" : "idle";
+        string facing = dir.Y switch
         {
-            (0, 1) => walkBack,
-            (1, 1) => walkBack,
-            (-1, 1) => walkBack,
-            (0, -1) => walkFront,
-            (1, -1) => walkFront,
-            (-1, -1) => walkFront,
-            _ => walkSide
+            > 0 => "back",
+            < 0 => "front",
+            _ => "side"
         };
+
+        string nextAnimation = $"{action}_{facing}";
+        if (currentAnimation != nextAnimation)
+        {
+            currentAnimation = nextAnimation;
+            playerSprite.SetAnimation(nextAnimation);
+        }
+    }
+
+    private void DefineAnimations(ContentManager content, SpriteSheet spriteSheet)
+    {
+        spriteSheet.DefineAnimation("idle_back", builder =>
+        {
+            builder.IsLooping(true)
+            .AddFrame("jessiee_idle_back_001", TimeSpan.FromSeconds(0.4))
+            .AddFrame("jessiee_idle_back_002", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_idle_back_003", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_idle_back_004", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_idle_back_005", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_idle_back_006", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_idle_back_007", TimeSpan.FromSeconds(0.2));
+        });
+
+        spriteSheet.DefineAnimation("idle_side", builder =>
+        {
+            builder.IsLooping(true)
+            .AddFrame("jessiee_idle_side_001", TimeSpan.FromSeconds(0.4))
+            .AddFrame("jessiee_idle_side_002", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_idle_side_003", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_idle_side_004", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_idle_side_005", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_idle_side_006", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_idle_side_007", TimeSpan.FromSeconds(0.2));
+        });
+
+        spriteSheet.DefineAnimation("idle_front", builder =>
+        {
+            builder.IsLooping(true)
+            .AddFrame("jessiee_idle_front_001", TimeSpan.FromSeconds(0.4))
+            .AddFrame("jessiee_idle_front_002", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_idle_front_003", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_idle_front_004", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_idle_front_005", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_idle_front_006", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_idle_front_007", TimeSpan.FromSeconds(0.2));
+        });
+
+        spriteSheet.DefineAnimation("walk_back", builder =>
+        {
+            builder.IsLooping(true)
+            .AddFrame("jessiee_walk_back_001", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_walk_back_002", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_walk_back_003", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_walk_back_004", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_walk_back_005", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_walk_back_006", TimeSpan.FromSeconds(0.2));
+        });
+
+        spriteSheet.DefineAnimation("walk_side", builder =>
+        {
+            builder.IsLooping(true)
+            .AddFrame("jessiee_walk_side_001", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_walk_side_002", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_walk_side_003", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_walk_side_004", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_walk_side_005", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_walk_side_006", TimeSpan.FromSeconds(0.2));
+        });
+
+        spriteSheet.DefineAnimation("walk_front", builder =>
+        {
+            builder.IsLooping(true)
+            .AddFrame("jessiee_walk_front_001", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_walk_front_002", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_walk_front_003", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_walk_front_004", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_walk_front_005", TimeSpan.FromSeconds(0.2))
+            .AddFrame("jessiee_walk_front_006", TimeSpan.FromSeconds(0.2));
+        });
+
+        playerSprite = new AnimatedSprite(spriteSheet, "idle_back");
     }
 
     private void CheckKeyboardInput()
@@ -99,6 +157,8 @@ public class PlayerScript
         );
 
         playerPosition += NormalizeSafe(inputMovement) * speed;
+
+        UpdateAnimation();
     }
 
     Vector2 NormalizeSafe(Vector2 pos)

@@ -1,9 +1,7 @@
 using LightsOut.Scripts;
-using LightsOut.Scripts.WorldGen;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary;
-using MonoGame.Extended;
 
 namespace LightsOut;
 
@@ -18,7 +16,7 @@ public class Game1 : Core
     {
         playerScript = new PlayerScript();
         base.Initialize();
-        cameraScript = new CameraScript(GraphicsDevice.Viewport, new Vector2(0, 35));
+        cameraScript = new CameraScript(GraphicsDevice.Viewport, new Vector2(0, -35));
     }
 
     protected override void LoadContent()
@@ -37,7 +35,7 @@ public class Game1 : Core
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.White);
+        GraphicsDevice.Clear(Color.CornflowerBlue);
         SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: cameraScript.GetViewMatrix());
         {
             playerScript.Draw(SpriteBatch);
