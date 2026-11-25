@@ -1,34 +1,44 @@
 using LightsOut.Scripts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
+using MonoGame.Extended.ViewportAdapters;
 using MonoGameLibrary;
 
 namespace LightsOut;
 
 public class Game1 : Core
 {
-    private Player playerScript;
-    private CameraScript cameraScript;
+    private Player player;
+    // private CameraScript cameraScript;
+    private OrthographicCamera camera;
 
-    public Game1() : base("Lights Out", 1920, 1080, false) {}
+    public Game1() : base("Lights Out", 1920, 1080, false) {
+        Window.AllowUserResizing = true;
+    }
 
     protected override void Initialize()
     {
-        playerScript = new Player();
+        player = new Player();
         base.Initialize();
-        cameraScript = new CameraScript(GraphicsDevice.Viewport, new Vector2(0, -35));
+
+        BoxingViewportAdapter viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, 1280, 720);
+        camera = new OrthographicCamera(viewportAdapter);
     }
 
     protected override void LoadContent()
     {
-        playerScript.LoadContent(Content);
+        player.LoadContent(Content);
     }
 
     protected override void Update(GameTime gameTime)
     {
-        playerScript.Update(gameTime);
+        float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        player.Update(gameTime);
 
-        // cameraScript.Follow(playerScript.PlayerPosition);
+        float t = MathHelper.Clamp(10f * dt, 0f, 1f);
+        // camera.LookAt(player.PlayerPosition);
+        camera.LookAt(Vector2.Lerp(camera.Center, player.PlayerPosition, t));
 
         base.Update(gameTime);
     }
@@ -36,9 +46,9 @@ public class Game1 : Core
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
-        SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: cameraScript.GetViewMatrix());
+        SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: camera.GetViewMatrix());
         {
-            playerScript.Draw(SpriteBatch);
+            player.Draw(SpriteBatch);
         }
         SpriteBatch.End();
 

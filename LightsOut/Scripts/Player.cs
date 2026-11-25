@@ -4,9 +4,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Graphics;
-using MonoGame.Extended.Animations;
 using MonoGameLibrary;
-using System.Diagnostics;
 
 namespace LightsOut.Scripts;
 
@@ -39,7 +37,7 @@ public class Player : Entity
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        int scale = 4;
+        int scale = 2;
         spriteBatch.Draw(animatedSprite, entityPosition, 0, new Vector2(scale));
     }
 
