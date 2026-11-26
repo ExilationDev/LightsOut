@@ -10,7 +10,6 @@ namespace LightsOut;
 public class Game1 : Core
 {
     private Player player;
-    // private CameraScript cameraScript;
     private OrthographicCamera camera;
 
     public Game1() : base("Lights Out", 1920, 1080, false) {
@@ -37,7 +36,6 @@ public class Game1 : Core
         player.Update(gameTime);
 
         float t = MathHelper.Clamp(10f * dt, 0f, 1f);
-        // camera.LookAt(player.PlayerPosition);
         camera.LookAt(Vector2.Lerp(camera.Center, player.PlayerPosition, t));
 
         base.Update(gameTime);
