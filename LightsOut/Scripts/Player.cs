@@ -13,10 +13,10 @@ public class Player : Entity
     private Vector2 inputMovement;
     private Vector2 prevMovement;
 
-    public Vector2 PlayerPosition { get { return entityPosition; } set { entityPosition = value; } }
+    public Vector2 PlayerPosition { get => entityPosition; set => entityPosition = value; }
 
     public Player() {
-        entitySpeed = 5;
+        entitySpeed = 2;
     }
 
     public override void LoadContent(ContentManager content)
@@ -37,31 +37,7 @@ public class Player : Entity
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        int scale = 2;
-        spriteBatch.Draw(animatedSprite, entityPosition, 0, new Vector2(scale));
-    }
-
-    private void UpdateAnimation()
-    {
-        bool isMoving = inputMovement.LengthSquared() > 0;
-        Vector2 dir = isMoving ? inputMovement : prevMovement;
-
-        animatedSprite.Effect = dir.X < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-
-        string action = isMoving ? "walk" : "idle";
-        string facing = dir.Y switch
-        {
-            > 0 => "back",
-            < 0 => "front",
-            _ => "side"
-        };
-
-        string nextAnimation = $"{action}_{facing}";
-        if (currentAnimation != nextAnimation)
-        {
-            currentAnimation = nextAnimation;
-            animatedSprite.SetAnimation(nextAnimation);
-        }
+        spriteBatch.Draw(animatedSprite, entityPosition, 0, Vector2.One);
     }
 
     private void DefineAnimations(ContentManager content, SpriteSheet spriteSheet)
@@ -138,11 +114,35 @@ public class Player : Entity
         animatedSprite = new AnimatedSprite(spriteSheet, "idle_back");
     }
 
+    private void UpdateAnimation()
+    {
+        bool isMoving = inputMovement.LengthSquared() > 0;
+        Vector2 dir = isMoving ? inputMovement : prevMovement;
+
+        animatedSprite.Effect = dir.X < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+
+        string action = isMoving ? "walk" : "idle";
+        string facing = dir.Y switch
+        {
+            > 0 => "back",
+            < 0 => "front",
+            _ => "side"
+        };
+
+        string nextAnimation = $"{action}_{facing}";
+        if (currentAnimation != nextAnimation)
+        {
+            currentAnimation = nextAnimation;
+            animatedSprite.SetAnimation(nextAnimation);
+            // animatedSprite.Controller.Speed = entitySpeed;
+        }
+    }
+
     private void CheckKeyboardInput()
     {
         float speed = entitySpeed;
 
-        if (inputMovement.Length() > 0) prevMovement = inputMovement;
+        if (inputMovement.LengthSquared() > 0) prevMovement = inputMovement;
         inputMovement = new Vector2(
             (Core.Input.Keyboard.IsKeyDown(Keys.A) || Core.Input.Keyboard.IsKeyDown(Keys.Left) ? -1 : 0) +
             (Core.Input.Keyboard.IsKeyDown(Keys.D) || Core.Input.Keyboard.IsKeyDown(Keys.Right) ? 1 : 0),
