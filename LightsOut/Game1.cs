@@ -32,8 +32,6 @@ public class Game1 : Core
 
         cameraScript.Follow(playerScript.PlayerPosition);
 
-        playerScript.PlayerPosition = RandomPoint.GetRandomPointInCircle(100);
-
         base.Update(gameTime);
     }
 
