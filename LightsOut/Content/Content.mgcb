@@ -10,8 +10,14 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\pipeline-references\MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
+
+#begin sprites/data/jessiee.json
+/importer:
+/processor:
+/build:sprites/data/jessiee.json
 
 #begin sprites/jessiee_atlas.xml
 /copy:sprites/jessiee_atlas.xml
