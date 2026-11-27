@@ -16,7 +16,7 @@ public class Player : Entity
     public Vector2 PlayerPosition { get { return entityPosition; } set { entityPosition = value; } }
 
     public Player() {
-        entitySpeed = 5;
+        entitySpeed = 10;
     }
 
     public override void LoadContent(ContentManager content)
@@ -37,8 +37,7 @@ public class Player : Entity
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        int scale = 2;
-        spriteBatch.Draw(animatedSprite, entityPosition, 0, new Vector2(scale));
+        spriteBatch.Draw(animatedSprite, entityPosition, 0, Vector2.One);
     }
 
     private void UpdateAnimation()
