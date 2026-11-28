@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Graphics;
 using MonoGame.Extended.Tilemaps;
-using MonoGameLibrary;
 
 namespace LightsOut.Scripts.WorldGen;
 
@@ -16,27 +14,13 @@ class WorldGeneration
     DungeonGenerator generator;
     TilemapTileset tileSet;
 
-    BasicEffect basicEffect;
-    RasterizerState wireframeState;
-
     public WorldGeneration() {}
 
     public void LoadContent(ContentManager content)
     {
-        basicEffect = new BasicEffect(Core.GraphicsDevice)
-        {
-            VertexColorEnabled = true,
-            Projection = Matrix.CreateOrthographicOffCenter(
-            0, Core.GraphicsDevice.Viewport.Width,
-            Core.GraphicsDevice.Viewport.Height, 0,
-            0, 1)
-        };
-
-        wireframeState = new RasterizerState { FillMode = FillMode.WireFrame };
-
         tileSet = content.Load<TilemapTileset>("sprites/data/dungeongen_tileset1");
         generator = new DungeonGenerator();
-        grid = generator.Generate(200, 200, 2, 25, 10, 25);
+        grid = generator.Generate(350, 350, 50, 50, 3, 25);
     }
 
     public void Update(GameTime gameTime) { }

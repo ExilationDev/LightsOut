@@ -1,4 +1,5 @@
-﻿using LightsOut.Scripts.WorldGen;
+﻿using System;
+using LightsOut.Scripts.WorldGen;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
@@ -12,6 +13,7 @@ public class GameplayScreen : GameScreen
 {
     private Player player;
     private OrthographicCamera camera;
+    Vector2 lerpCamPos;
     WorldGeneration worldGeneration;
 
     public GameplayScreen(Game game) : base(game) {}
@@ -23,7 +25,7 @@ public class GameplayScreen : GameScreen
         base.Initialize();
 
         // BoxingViewportAdapter viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, 640, 360);
-        BoxingViewportAdapter viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, 4000, 2000);
+        BoxingViewportAdapter viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, 4000, 2000); // temporary
         camera = new OrthographicCamera(viewportAdapter);
     }
 
@@ -39,9 +41,19 @@ public class GameplayScreen : GameScreen
         float dt = (float)gameTime.ElapsedGameTime.TotalSeconds; // delta time
         player.Update(gameTime);
 
-        float t = MathHelper.Clamp(10f * dt, 0f, 1f); // time
+        float t = 1f - MathF.Exp(-10f * dt); // time
         // camera.LookAt(player.PlayerPosition);
-        camera.LookAt(Vector2.Lerp(camera.Center, player.PlayerPosition, t));
+        // camera.LookAt(Vector2.Lerp(camera.Center, player.PlayerPosition, t));
+        Vector2 targetTopLeft = player.PlayerPosition - new Vector2(
+            camera.BoundingRectangle.Width / 2f,
+            camera.BoundingRectangle.Height / 2f
+        );
+        lerpCamPos = Vector2.Lerp(lerpCamPos, targetTopLeft, t);
+
+        camera.Position = new Vector2(
+            MathF.Round(lerpCamPos.X),
+            MathF.Round(lerpCamPos.Y)
+        );
     }
 
     public override void Draw(GameTime gameTime)

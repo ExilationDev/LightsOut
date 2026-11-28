@@ -4,7 +4,6 @@ using System.Linq;
 using DelaunatorSharp;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
 using MonoGameLibrary;
 
 namespace LightsOut.Scripts.WorldGen;
@@ -16,6 +15,7 @@ class DungeonGenerator
 {
     public List<DungeonObject> Rooms { get; private set; }
 
+    // The generator
     public DungeonGrid Generate(int width, int height, int seed, int roomCount = 25, int minRoomSize = 4, int maxRoomSize = 9)
     {
         var grid = new DungeonGrid(width, height);

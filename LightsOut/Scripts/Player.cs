@@ -16,7 +16,7 @@ public class Player : Entity
     public Vector2 PlayerPosition { get { return entityPosition; } set { entityPosition = value; } }
 
     public Player() {
-        entitySpeed = 10;
+        entitySpeed = 3;
     }
 
     public override void LoadContent(ContentManager content)
