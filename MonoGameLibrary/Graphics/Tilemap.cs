@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGameLibrary.Graphics;
 
+[Obsolete]
 class Tilemap
 {
     private readonly Tileset _tileset;

@@ -1,7 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 
 namespace MonoGameLibrary.Input;
 
+[Obsolete]
 public class InputManager
 {
     /// <summary>

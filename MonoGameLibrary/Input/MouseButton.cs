@@ -1,5 +1,8 @@
-﻿namespace MonoGameLibrary.Input;
+﻿using System;
 
+namespace MonoGameLibrary.Input;
+
+[Obsolete]
 public enum MouseButton
 {
     Left,

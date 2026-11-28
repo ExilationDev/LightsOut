@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace MonoGameLibrary.Graphics;
 
+[Obsolete]
 public class AnimatedSprite : Sprite
 {
     private int _currentFrame;

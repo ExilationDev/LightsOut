@@ -1,7 +1,9 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using System;
+using Microsoft.Xna.Framework.Input;
 
 namespace MonoGameLibrary.Input;
 
+[Obsolete]
 public class KeyboardInfo
 {
     /// <summary>

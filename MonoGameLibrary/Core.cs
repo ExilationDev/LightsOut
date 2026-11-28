@@ -39,6 +39,7 @@ public class Core : Game
     /// <summary>
     /// Gets a reference to the input management system.
     /// </summary>
+    [Obsolete]
     public static InputManager Input { get; private set; }
 
     /// <summary>

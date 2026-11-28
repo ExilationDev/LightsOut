@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MonoGameLibrary.Input;
 
+[Obsolete]
 public class GamePadInfo
 {
     private TimeSpan _vibrationTimeRemaining = TimeSpan.Zero;

@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGameLibrary.Graphics;
 
+[Obsolete]
 public class TextureAtlas
 {
     private Dictionary<string, TextureRegion> _regions;

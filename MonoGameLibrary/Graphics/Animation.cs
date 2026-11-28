@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace MonoGameLibrary.Graphics;
 
+[Obsolete]
 public class Animation
 {
     /// <summary>

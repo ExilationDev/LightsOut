@@ -1,5 +1,8 @@
-﻿namespace MonoGameLibrary.Graphics;
+﻿using System;
 
+namespace MonoGameLibrary.Graphics;
+
+[Obsolete]
 class Tileset
 {
     private readonly TextureRegion[] _tiles;
