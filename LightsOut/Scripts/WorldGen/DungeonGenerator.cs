@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using DelaunatorSharp;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
+using MonoGameLibrary;
 
 namespace LightsOut.Scripts.WorldGen;
 
@@ -10,6 +14,8 @@ namespace LightsOut.Scripts.WorldGen;
 /// </summary>
 class DungeonGenerator
 {
+    public List<DungeonObject> Rooms { get; private set; }
+
     public DungeonGrid Generate(int width, int height, int seed, int roomCount = 25, int minRoomSize = 4, int maxRoomSize = 9)
     {
         var grid = new DungeonGrid(width, height);
@@ -26,6 +32,8 @@ class DungeonGenerator
                 CarveRoom(grid, room);
             }
         }
+
+        Rooms = rooms;
 
         return grid;
     }
@@ -130,5 +138,41 @@ class DungeonGenerator
                 rooms[i] = room;
             }
         }
+    }
+
+    // Delaunay Triangulation
+    public void DrawTriangulate(SpriteBatch spriteBatch, float tileSize)
+    {
+        if (Rooms.Count < 1) throw new Exception("Could not draw triangulation edges of the dungeon structure because there are no rooms. Did you forget to call DungeonGenerator.Generate() before drawing?");
+        IPoint[] points = Rooms
+            .Select(p => (IPoint)new DelaunatorSharp.Point(p.CenterX, p.CenterY))
+            .ToArray();
+
+        Delaunator delaunator = new Delaunator(points);
+
+        Texture2D pixel = new Texture2D(Core.GraphicsDevice, 1, 1);
+        pixel.SetData([Color.White]);
+
+        delaunator.ForEachTriangleEdge(e =>
+        {
+            Vector2 start = new Vector2((float)e.P.X * tileSize, (float)e.P.Y * tileSize);
+            Vector2 end = new Vector2((float)e.Q.X * tileSize, (float)e.Q.Y * tileSize);
+
+            Vector2 delta = end - start;
+            float length = delta.Length();
+            float rotation = (float)Math.Atan2(delta.Y, delta.X);
+
+            spriteBatch.Draw(
+                pixel,
+                start,
+                null,
+                Color.Blue,
+                rotation,
+                new Vector2(0f, 0.5f),
+                new Vector2(length, 5),
+                SpriteEffects.None,
+                0f
+            );
+        });
     }
 }

@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace LightsOut.Scripts.WorldGen;
+﻿namespace LightsOut.Scripts.WorldGen;
 
 public enum DungeonTile
 {

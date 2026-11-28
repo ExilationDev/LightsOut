@@ -14,6 +14,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin sprites/data/dungeongen_tileset1.tsx
+/importer:TilemapTilesetImporter
+/processor:TilemapTilesetProcessor
+/processorParam:Version=6.1.1.0
+/build:sprites/data/dungeongen_tileset1.tsx
+
 #begin sprites/data/jessiee.json
 /importer:TexturePackerJsonImporter
 /processor:TexturePackerProcessor

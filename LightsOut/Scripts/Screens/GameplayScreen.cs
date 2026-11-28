@@ -22,7 +22,8 @@ public class GameplayScreen : GameScreen
         worldGeneration = new WorldGeneration();
         base.Initialize();
 
-        BoxingViewportAdapter viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, 640, 360);
+        // BoxingViewportAdapter viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, 640, 360);
+        BoxingViewportAdapter viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, 4000, 2000);
         camera = new OrthographicCamera(viewportAdapter);
     }
 
@@ -48,7 +49,7 @@ public class GameplayScreen : GameScreen
         GraphicsDevice.Clear(Color.CornflowerBlue);
         Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: camera.GetViewMatrix());
         {
-            worldGeneration.Draw(Core.SpriteBatch);
+            worldGeneration.Draw(Core.SpriteBatch, camera);
             player.Draw(Core.SpriteBatch);
         }
         Core.SpriteBatch.End();
